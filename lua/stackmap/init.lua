@@ -1,14 +1,17 @@
 local M = {}
 
-M.findFile = function(filename)
-	local path = vim.api.nvim_get_runtime_file(filename, true)
-	if path[1] == nil then
-		print("File not found: " .. filename)
-		return nil
+M.find_file = function(name, directory)
+	local pfile = io.popen('find "' .. directory .. '" -type f')
+	if not pfile then
+		print("Error: Could not find file")
+		return
 	end
-
-	print("Found file: " .. path[1])
-	return path[1]
+	for filename in pfile:lines() do
+		if filename:match(name) then
+			print("Found: " .. filename)
+			return filename
+		end
+	end
+	pfile:close()
 end
-
 return M
