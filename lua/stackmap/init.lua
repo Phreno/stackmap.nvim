@@ -3,6 +3,7 @@ local M = {}
 M.findFile = function(filename)
 	local path = vim.api.nvim_get_runtime_file(filename, true)
 	if path[1] == nil then
+		print("File not found: " .. filename)
 		return nil
 	end
 
