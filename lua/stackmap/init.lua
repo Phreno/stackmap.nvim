@@ -6,6 +6,7 @@ M.findFile = function(filename)
     return nil
   end
 
+  print "Found file:" .. path[1]
   return path[1]
 end
 
